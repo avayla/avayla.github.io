@@ -1,0 +1,37 @@
+
+<!DOCTYPE html>
+<html>
+<head>
+<body>
+
+<h1>Current Incidents</h1>
+<p>This website will display all currently registered incidents in the database in tabular form.</p>
+                
+<p id = "test"> </p>
+
+<script src="https://ajax.googleapis.com/ajax/libs/jquery/3.3.1/jquery.min.js"></script>
+
+<script>
+
+var databaseReq = new XMLHttpRequest;
+databaseReq.open('GET', "https://db-api-cs2013-6165.nodechef.com/api/incidents/query/search/all", true);
+databaseReq.send();
+
+databaseReq.addEventListener("readystatechange", processRequest, false);
+
+function processRequest(e)
+{
+    if (databaseReq.readyState == 4 && databaseReq.status == 200)
+    {
+       var responseObj = JSON.parse(databaseReq.responseText);
+       var responseTest = JSON.stringify(responseObj);
+       document.getElementById('test').innerHTML = responseTest;
+    }
+}
+
+
+</script>
+
+
+</body>
+</html>
